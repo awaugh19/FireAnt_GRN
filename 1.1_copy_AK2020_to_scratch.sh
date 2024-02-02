@@ -18,4 +18,3 @@ mkdir -p $ArsenaultKing2020_raw_fq
 fi
 
 scp -r ahw22099@xfer.gacrc.uga.edu:/project/bghlab/Sinv_RNA/Data_for_Deposition $scratch_dir
-mv /scratch/ahw22099/FireAnt_GRN/Data_for_Deposition /scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_raw_fq
