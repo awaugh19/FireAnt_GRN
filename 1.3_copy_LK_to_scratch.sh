@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1			                                            #Single task job
 #SBATCH --cpus-per-task=8	                                          #Number of cores per task
 #SBATCH --mem=24gb			                                            #Total memory for job
-#SBATCH --time=2:00:00  		                                        #Time limit hrs:min:sec
+#SBATCH --time=24:00:00  		                                        #Time limit hrs:min:sec
 #SBATCH --output=/scratch/ahw22099/FireAnt_GRN/std_out/1.3_cp_proj_scratch_LK.log.%j			    #Standard output
 #SBATCH --error=/scratch/ahw22099/FireAnt_GRN/std_out/1.3_cp_proj_scratch_LK.err.%j			    #Standard error log
 #SBATCH --mail-user=ahw22099@uga.edu                                #Where to send mail -
