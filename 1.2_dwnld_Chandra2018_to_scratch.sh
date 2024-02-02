@@ -5,8 +5,8 @@
 #SBATCH --cpus-per-task=8	                                          #Number of cores per task
 #SBATCH --mem=24gb			                                            #Total memory for job
 #SBATCH --time=48:00:00  		                                        #Time limit hrs:min:sec
-#SBATCH --output=/home/ahw22099/Alignment_to_UNIL_3.4/1.2_dwnload_Chandra2018_SRA.log.%j			    #Standard output
-#SBATCH --error=/home/ahw22099/Alignment_to_UNIL_3.4/1.2_dwnload_Chandra2018_SRA.err.%j			    #Standard error log
+#SBATCH --output=/scratch/ahw22099/FireAnt_GRN/std_out/1.2_dwnload_Chandra2018_SRA.log.%j			    #Standard output
+#SBATCH --error=/scratch/ahw22099/FireAnt_GRN/std_out/1.2_dwnload_Chandra2018_SRA.err.%j			    #Standard error log
 #SBATCH --mail-user=ahw22099@uga.edu                                #Where to send mail -
 #SBATCH --mail-type=END,FAIL                                        #Mail events (BEGIN, END, FAIL, ALL)
 
@@ -21,7 +21,7 @@ SRR7209544 SRR7209545 SRR7209546 \
 SRR7209547 SRR7209548 SRR7209549 \
 SRR7209550 SRR7209551"
 
-Chandra2018_raw_fq="/scratch/ahw22099/UNIL_3.4_Alignment/Chandra2018_raw_fq"
+Chandra2018_raw_fq="/scratch/ahw22099/FireAnt_GRN/Chandra2018_raw_fq"
 mkdir -p $Chandra2018_raw_fq
 
 # use sratools to download SRRX .fq from BioProject
