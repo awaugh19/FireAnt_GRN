@@ -16,32 +16,32 @@ module load STAR/2.7.10b-GCC-11.3.0
 ########### SB ############
 
 
-ArsenaultKing2020_trimmed_fq="/scratch/ahw22099/UNIL_3.4_Alignment/ArsenaultKing2020_trimmed_fq"
+ArsenaultKing2020_trimmed_fq="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_trimmed_fq"
 if [ ! -d $ArsenaultKing2020_trimmed_fq ]
 then
 mkdir -p $ArsenaultKing2020_trimmed_fq
 fi
 
-STAR_genome_SB="/scratch/ahw22099/UNIL_3.4_Alignment/ArsenaultKing2020_STAR_genome_SB"
+STAR_genome_SB="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_STAR_genome_SB"
 if [ ! -d $STAR_genome_SB ]
 then
 mkdir -p $STAR_genome_SB
 fi
 
-SB_genome="/scratch/ahw22099/UNIL_3.4_Alignment/UNIL_Sinv_3.4_SB"
+SB_genome="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB"
 if [ ! -d $SB_genome ]
 then
 mkdir -p $SB_genome
 fi
 
 ##1st pass
-ArsenaultKing2020_STAR_SB="/scratch/ahw22099/UNIL_3.4_Alignment/ArsenaultKing2020_STAR_SB"
+ArsenaultKing2020_STAR_SB="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_STAR_SB"
 if [ ! -d $LK_STAR_SB ]
 then
 mkdir -p $LK_STAR_SB
 fi
 
-FirstPass_SB="/scratch/ahw22099/UNIL_3.4_Alignment/ArsenaultKing2020_STAR_SB/1p_out_forDEX"
+FirstPass_SB="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_STAR_SB/1p_out_forDEX"
 if [ ! -d $FirstPass_SB ]
 then
 mkdir -p $FirstPass_SB
@@ -58,7 +58,7 @@ echo $R
 
 base=`basename "$R" _raw_trimmed.fq.gz`
 
-SecondPass_SB="/scratch/ahw22099/UNIL_3.4_Alignment/ArsenaultKing2020_STAR_SB/2p_out_forDEX"
+SecondPass_SB="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_STAR_SB/2p_out_forDEX"
 if [ ! -d $SecondPass_SB ]
 then
 mkdir -p $SecondPass_SB

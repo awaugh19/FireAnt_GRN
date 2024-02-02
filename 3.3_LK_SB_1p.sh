@@ -9,39 +9,39 @@
 #SBATCH --error=/home/ahw22099/Alignment_to_UNIL_3.4/3.3B_LK_SB_1p.err.%j		    #Standard error log
 #SBATCH --mail-user=ahw22099@uga.edu                                            #Where to send mail -
 #SBATCH --mail-type=END,FAIL,ARRAY_TASKS                                        #Mail events (BEGIN, END, FAIL, ALL)
-#SBATCH --array=0-38
+#SBATCH --array=0-48
 
 ################## STAR ##################
 module load STAR/2.7.10b-GCC-11.3.0
 ########### SB ############
 
-LK_trimmed_fq="/scratch/ahw22099/UNIL_3.4_Alignment/LK_trimmed_fq"
+LK_trimmed_fq="/scratch/ahw22099/FireAnt_GRN/LK_trimmed_fq"
 if [ ! -d $LK_trimmed_fq ]
 then
 mkdir -p $LK_trimmed_fq
 fi
 
-STAR_genome_SB="/scratch/ahw22099/UNIL_3.4_Alignment/LK_STAR_genome_SB"
+STAR_genome_SB="/scratch/ahw22099/FireAnt_GRN/LK_STAR_genome_SB"
 if [ ! -d $STAR_genome_SB ]
 then
 mkdir -p $STAR_genome_SB
 fi
 
 
-SB_genome="/scratch/ahw22099/UNIL_3.4_Alignment/UNIL_Sinv_3.4_SB"
+SB_genome="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB"
 if [ ! -d $SB_genome ]
 then
 mkdir -p $SB_genome
 fi
 
 ##1st pass
-LK_STAR_SB="/scratch/ahw22099/UNIL_3.4_Alignment/LK_STAR_SB"
+LK_STAR_SB="/scratch/ahw22099/FireAnt_GRN/LK_STAR_SB"
 if [ ! -d $LK_STAR_SB ]
 then
 mkdir -p $LK_STAR_SB
 fi
 
-FirstPass_SB="/scratch/ahw22099/UNIL_3.4_Alignment/LK_STAR_SB/1p_out"
+FirstPass_SB="/scratch/ahw22099/FireAnt_GRN/LK_STAR_SB/1p_out"
 if [ ! -d $FirstPass_SB ]
 then
 mkdir -p $FirstPass_SB
