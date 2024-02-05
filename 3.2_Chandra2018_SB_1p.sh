@@ -34,9 +34,9 @@ fi
 
 ##1st pass
 Chandra2018_STAR_SB="/scratch/ahw22099/FireAnt_GRN/Chandra2018_STAR_SB"
-if [ ! -d $ArsenaultKing2020_STAR_SB ]
+if [ ! -d $Chandra2018_STAR_SB ]
 then
-mkdir -p $ArsenaultKing2020_STAR_SB
+mkdir -p $Chandra2018_STAR_SB
 fi
 
 FirstPass_SB="/scratch/ahw22099/FireAnt_GRN/Chandra2018_STAR_SB/1p_out"
@@ -45,7 +45,7 @@ then
 mkdir -p $FirstPass_SB
 fi
 
-cd $ArsenaultKing2020_trimmed_fq
+cd $Chandra2018_trimmed_fq
 
 #make sample list for array job
 R_sample_list=($(<Chandra2018_trimmed_input_list.txt))
