@@ -34,8 +34,8 @@ gunzip -c > "$SB_genome"/GCF_016802725.1_UNIL_Sinv_3.0_genomic.gff
 gffread -T "$SB_genome"/GCF_016802725.1_UNIL_Sinv_3.0_genomic.gff \
  -o "$SB_genome"/GCF_016802725.1_UNIL_Sinv_3.0_genomic.gtf
 
- curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/802/725/GCF_016802725.1_UNIL_Sinv_3.0/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna.gz | \
- gunzip -c > "$SB_genome"/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna.gz
+curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/802/725/GCF_016802725.1_UNIL_Sinv_3.0/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna.gz | \
+gunzip -c > "$SB_genome"/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
 ################## STAR ##################
 module load STAR/2.7.10b-GCC-11.3.0
 ########### SB ###########
