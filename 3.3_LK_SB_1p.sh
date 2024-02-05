@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=3B_LK_SB_1p.sh                                               #Job name
+#SBATCH --job-name=3.3_LK_SB_1p.sh                                               #Job name
 #SBATCH --partition=batch		                                                    #Partition (queue) name
 #SBATCH --ntasks=4			                                                        #Single task job
 #SBATCH --cpus-per-task=12                                                      #Number of cores per task
 #SBATCH --mem=24gb			                                                        #Total memory for job
 #SBATCH --time=24:00:00  		                                                    #Time limit hrs:min:sec
-#SBATCH --output=/home/ahw22099/Alignment_to_UNIL_3.4/3.3B_LK_SB_1p.log.%j			#Standard output
-#SBATCH --error=/home/ahw22099/Alignment_to_UNIL_3.4/3.3B_LK_SB_1p.err.%j		    #Standard error log
+#SBATCH --output=/home/ahw22099/FireAnt_GRN/std_out/3.3_LK_SB_1p.log.%j			#Standard output
+#SBATCH --error=/home/ahw22099/FireAnt_GRN/std_out/3.3_LK_SB_1p.err.%j		    #Standard error log
 #SBATCH --mail-user=ahw22099@uga.edu                                            #Where to send mail -
 #SBATCH --mail-type=END,FAIL,ARRAY_TASKS                                        #Mail events (BEGIN, END, FAIL, ALL)
 #SBATCH --array=0-48
@@ -21,7 +21,7 @@ then
 mkdir -p $LK_trimmed_fq
 fi
 
-STAR_genome_SB="/scratch/ahw22099/FireAnt_GRN/LK_STAR_genome_SB"
+STAR_genome_SB="/scratch/ahw22099/FireAnt_GRN/STAR_genome_SB"
 if [ ! -d $STAR_genome_SB ]
 then
 mkdir -p $STAR_genome_SB
