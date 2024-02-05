@@ -16,10 +16,10 @@ module load STAR/2.7.10b-GCC-11.3.0
 ########### SB ############
 
 
-ArsenaultKing2020_trimmed_fq="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_trimmed_fq"
-if [ ! -d $ArsenaultKing2020_trimmed_fq ]
+Chandra2018_trimmed_fq="/scratch/ahw22099/FireAnt_GRN/Chandra2018_trimmed_fq"
+if [ ! -d $Chandra2018_trimmed_fq ]
 then
-mkdir -p $ArsenaultKing2020_trimmed_fq
+mkdir -p $Chandra2018_trimmed_fq
 fi
 
 STAR_genome_SB="/scratch/ahw22099/FireAnt_GRN/STAR_genome_SB"
@@ -35,30 +35,30 @@ mkdir -p $SB_genome
 fi
 
 ##1st pass
-ArsenaultKing2020_STAR_SB="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_STAR_SB"
-if [ ! -d $LK_STAR_SB ]
+Chandra2018_STAR_SB="/scratch/ahw22099/FireAnt_GRN/Chandra2018_STAR_SB"
+if [ ! -d $Chandra2018_STAR_SB ]
 then
-mkdir -p $LK_STAR_SB
+mkdir -p $Chandra2018_STAR_SB
 fi
 
-FirstPass_SB="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_STAR_SB/1p_out"
+FirstPass_SB="/scratch/ahw22099/FireAnt_GRN/Chandra2018_STAR_SB/1p_out"
 if [ ! -d $FirstPass_SB ]
 then
 mkdir -p $FirstPass_SB
 fi
 
 
-cd $ArsenaultKing2020_trimmed_fq
+cd $Chandra2018_trimmed_fq
 
 #make sample list for array job
-R_sample_list=($(<AK2020_trimmed_input_list.txt))
+R_sample_list=($(<Chandra2018_trimmed_input_list.txt))
 R=${R_sample_list[${SLURM_ARRAY_TASK_ID}]}
 
 echo $R
 
 base=`basename "$R" _raw_trimmed.fq.gz`
 
-SecondPass_SB="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_STAR_SB/2p_out"
+SecondPass_SB="/scratch/ahw22099/FireAnt_GRN/Chandra2018_STAR_SB/2p_out"
 if [ ! -d $SecondPass_SB ]
 then
 mkdir -p $SecondPass_SB
@@ -83,68 +83,23 @@ STAR \
 --outSAMattrIHstart 0 \
 --outFileNamePrefix $SecondPass_SB/"$base".SB2pass. \
 --limitBAMsortRAM 30000000000 \
---sjdbFileChrStartEnd \
-$FirstPass_SB/104AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/104AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/104DB.SB1pass.SJ.out.tab \
-$FirstPass_SB/104DO.SB1pass.SJ.out.tab \
-$FirstPass_SB/104GB.SB1pass.SJ.out.tab \
-$FirstPass_SB/104GO.SB1pass.SJ.out.tab \
-$FirstPass_SB/107AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/107AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/107EB.SB1pass.SJ.out.tab \
-$FirstPass_SB/107EO.SB1pass.SJ.out.tab \
-$FirstPass_SB/107GB.SB1pass.SJ.out.tab \
-$FirstPass_SB/107GO.SB1pass.SJ.out.tab \
-$FirstPass_SB/15AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/15AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/15DB.SB1pass.SJ.out.tab \
-$FirstPass_SB/15DO.SB1pass.SJ.out.tab \
-$FirstPass_SB/15GB.SB1pass.SJ.out.tab \
-$FirstPass_SB/15GO.SB1pass.SJ.out.tab \
-$FirstPass_SB/16CB.SB1pass.SJ.out.tab \
-$FirstPass_SB/16CO.SB1pass.SJ.out.tab \
-$FirstPass_SB/16DB.SB1pass.SJ.out.tab \
-$FirstPass_SB/16DO.SB1pass.SJ.out.tab \
-$FirstPass_SB/16GB.SB1pass.SJ.out.tab \
-$FirstPass_SB/16GO.SB1pass.SJ.out.tab \
-$FirstPass_SB/19AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/19AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/19DB.SB1pass.SJ.out.tab \
-$FirstPass_SB/19DO.SB1pass.SJ.out.tab \
-$FirstPass_SB/19GB.SB1pass.SJ.out.tab \
-$FirstPass_SB/19GO.SB1pass.SJ.out.tab \
-$FirstPass_SB/1EB_merge_trimmed.fq.gz.SB1pass.SJ.out.tab \
-$FirstPass_SB/1EO.SB1pass.SJ.out.tab \
-$FirstPass_SB/207AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/207AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/209AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/209AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/20AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/20AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/20DB.SB1pass.SJ.out.tab \
-$FirstPass_SB/20DO.SB1pass.SJ.out.tab \
-$FirstPass_SB/20IB.SB1pass.SJ.out.tab \
-$FirstPass_SB/20IO.SB1pass.SJ.out.tab \
-$FirstPass_SB/222AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/222AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/232AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/232AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/233AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/233AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/235AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/235AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/239AB_merge_trimmed.fq.gz.SB1pass.SJ.out.tab \
-$FirstPass_SB/239AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/240AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/240AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/30AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/30AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/30EB.SB1pass.SJ.out.tab \
-$FirstPass_SB/30EO.SB1pass.SJ.out.tab \
-$FirstPass_SB/30GB.SB1pass.SJ.out.tab \
-$FirstPass_SB/30GO.SB1pass.SJ.out.tab \
-$FirstPass_SB/5AB.SB1pass.SJ.out.tab \
-$FirstPass_SB/5AO.SB1pass.SJ.out.tab \
-$FirstPass_SB/5GB.SB1pass.SJ.out.tab \
-$FirstPass_SB/5GO.SB1pass.SJ.out.tab
+--sjdbFileChrStartEnd $FirstPass_SB/SRR7209532.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209533.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209534.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209535.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209536.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209537.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209538.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209539.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209540.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209541.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209542.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209543.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209544.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209545.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209546.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209547.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209548.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209549.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209550.SB1pass.SJ.out.tab \
+$FirstPass_SB/SRR7209551.SB1pass.SJ.out.tab 
