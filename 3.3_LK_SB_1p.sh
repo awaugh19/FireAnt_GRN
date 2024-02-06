@@ -9,7 +9,7 @@
 #SBATCH --error=/home/ahw22099/FireAnt_GRN/std_out/3.3_LK_SB_1p.err.%j		    #Standard error log
 #SBATCH --mail-user=ahw22099@uga.edu                                            #Where to send mail -
 #SBATCH --mail-type=END,FAIL,ARRAY_TASKS                                        #Mail events (BEGIN, END, FAIL, ALL)
-#SBATCH --array=0-53
+#SBATCH --array=0-52
 
 ################## STAR ##################
 module load STAR/2.7.10b-GCC-11.3.0
