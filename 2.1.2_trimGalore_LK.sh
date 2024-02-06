@@ -26,12 +26,11 @@ fi
 
 ############################# TRIM GALORE ######################################
 module load Trim_Galore/0.6.7-GCCcore-11.2.0
+cd $LK_raw_fq
 raw_fq_list=($(<LK_raw_input_list.txt))
 R=${raw_fq_list[${SLURM_ARRAY_TASK_ID}]}
 
 echo $R
-
-base=`basename "$R" .fastq.gz`
 
 ################ use trimGalore
 trim_galore --fastqc "$R" -o "$LK_trimmed_fq"
