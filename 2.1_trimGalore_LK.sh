@@ -18,7 +18,7 @@ mkdir -p $LK_raw_fq
 fi
 
 # trimmed_fq directories (for output)
-LK_trimmed_fq="/scratch/ahw22099/FireAnt_GRN/LK_trimmed_fq"
+LK_trimmed_fq="/scratch/ahw22099/FireAnt_GRçcdN/LK_trimmed_fq"
 if [ ! -d $LK_trimmed_fq ]
 then
 mkdir -p $LK_trimmed_fq
