@@ -15,10 +15,10 @@
 module load STAR/2.7.10b-GCC-11.3.0
 ########### SB ############
 
-LK_trimmed_fq="/scratch/ahw22099/FireAnt_GRN/LK_trimmed_fq"
-if [ ! -d $LK_trimmed_fq ]
+LK_trimmed_fq_tmp="/scratch/ahw22099/FireAnt_GRN/LK_trimmed_fq_tmp"
+if [ ! -d $LK_trimmed_fq_tmp ]
 then
-mkdir -p $LK_trimmed_fq
+mkdir -p $LK_trimmed_fq_tmp
 fi
 
 STAR_genome_SB="/scratch/ahw22099/FireAnt_GRN/STAR_genome_SB"
@@ -47,7 +47,7 @@ then
 mkdir -p $FirstPass_SB
 fi
 
-cd $LK_trimmed_fq
+cd $LK_trimmed_fq_tmp
 
 #make sample list for array job
 R1_sample_list=($(<LK_trimmed_input_list_1.txt))
