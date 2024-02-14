@@ -10,6 +10,8 @@
 #SBATCH --mail-user=ahw22099@uga.edu                                #Where to send mail -
 #SBATCH --mail-type=END,FAIL                                        #Mail events (BEGIN, END, FAIL, ALL)
 
+module load BLAST+/2.13.0-gompi-2022a
+
 cd /scratch/ahw22099/FireAnt_GRN/proteomes/primary_transcripts
 
 ### Make databases
