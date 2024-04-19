@@ -14,16 +14,19 @@ module load BLAST+/2.13.0-gompi-2022a
 
 cd /scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV
 
+curl -s https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/016/802/725/GCF_016802725.1_UNIL_Sinv_3.0/GCF_016802725.1_UNIL_Sinv_3.0_cds_from_genomic.fna.gz | \
+gunzip -c >/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_cds_from_genomic.fna
+
 ### Make databases
 # For Fontana 2020 CNV genes
 makeblastdb -in Sb-vs-SB_CNV_genes_Sinv.fasta -dbtype nucl -out fontana_db
 
 # For Solenopsis invicta
-makeblastdb -in /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna -dbtype nucl -out sinv_db
+makeblastdb -in /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_cds_from_genomic.fna -dbtype nucl -out sinv_db
 
 #### BLASTN
 #Run blastp to compare the protein sequences from fontana CNV fasta against the database created from the sinv genome
 blastn -query Sb-vs-SB_CNV_genes_Sinv.fasta -db sinv_db -out qFontana_vs_dSinv_blastn.out -evalue 1e-5 -outfmt 6 -subject_besthit -show_gis
 
 #Run blastp to compare the protein sequences from sinv against the database created from the fontana CNV fasta
-blastn -query /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna -db fontana_db -out qSinv_vs_dFontana_blastn.out -evalue 1e-5 -outfmt 6 -subject_besthit -show_gis
+blastn -query /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_cds_from_genomic.fna -db fontana_db -out qSinv_vs_dFontana_blastn.out -evalue 1e-5 -outfmt 6 -subject_besthit -show_gis
