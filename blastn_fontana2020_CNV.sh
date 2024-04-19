@@ -23,7 +23,7 @@ makeblastdb -in /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_U
 
 #### BLASTN
 #Run blastp to compare the protein sequences from fontana CNV fasta against the database created from the sinv genome
-blastn -query Sb-vs-SB_CNV_genes_Sinv.fasta -db sinv_db -out qFontana_vs_dSinv_blastp.out -evalue 1e-5 -outfmt 6 -perc_identity 90
+blastn -query Sb-vs-SB_CNV_genes_Sinv.fasta -db sinv_db -out qFontana_vs_dSinv_blastn.out -evalue 1e-5 -outfmt 6 -perc_identity 90
 
 #Run blastp to compare the protein sequences from sinv against the database created from the fontana CNV fasta
 blastn -query /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna -db fontana_db -out qSinv_vs_dFontana_blastn.out -evalue 1e-5 -outfmt 6 -perc_identity 90
