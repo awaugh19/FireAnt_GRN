@@ -6,7 +6,7 @@
 #SBATCH --mem=24gb			                                            #Total memory for job
 #SBATCH --time=48:00:00  		                                        #Time limit hrs:min:sec
 #SBATCH --output=/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/blastn_fontana2020_CNV.log.%j			    #Standard output
-#SBATCH --error=/scratch/ahw22099/FireAnt_GRN/Fonana2020_CNV/blastn_fontana2020_CNV.err.%j			    #Standard error log
+#SBATCH --error=/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/blastn_fontana2020_CNV.err.%j			    #Standard error log
 #SBATCH --mail-user=ahw22099@uga.edu                                #Where to send mail -
 #SBATCH --mail-type=END,FAIL                                        #Mail events (BEGIN, END, FAIL, ALL)
 
@@ -26,4 +26,4 @@ makeblastdb -in /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_U
 blastn -query Sb-vs-SB_CNV_genes_Sinv.fasta -db sinv_db -out qFontana_vs_dSinv_blastp.out -evalue 1e-5 -outfmt 6 -perc_identity 90
 
 #Run blastp to compare the protein sequences from sinv against the database created from the fontana CNV fasta
-blastn -query GCF_016802725.1_UNIL_Sinv_3.0_protein.faa -db fontana_db -out qSinv_vs_dFontana_blastn.out -evalue 1e-5 -outfmt 6 -perc_identity 90
+blastn -query /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna -db fontana_db -out qSinv_vs_dFontana_blastn.out -evalue 1e-5 -outfmt 6 -perc_identity 90
