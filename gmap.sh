@@ -33,6 +33,8 @@ then
 mkdir -p $SB_genome
 fi
 
+cd $ArsenaultKing2020_trimmed_fq
+
 #make sample list for array job
 R_sample_list=($(<AK2020_trimmed_input_list.txt))
 R=${R_sample_list[${SLURM_ARRAY_TASK_ID}]}
