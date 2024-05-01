@@ -25,5 +25,8 @@ OUTPUT_SAM="/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/Sb-vs-SB_CNV_genes_Sin
 # Step 1: Build the GSNAP index for the reference genome
 gmap_build -d $INDEX_NAME -k 15 -D $INDEX_DIR $GENOME_FASTA
 
+echo "##### NOTE: gmap_build complete #####"
 # Step 2: Run GSNAP for mapping
 gsnap -d $INDEX_NAME -D $INDEX_DIR -A sam $READS_FASTA > $OUTPUT_SAM
+
+echo "##### NOTE: gsnap complete #####"
