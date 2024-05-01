@@ -18,7 +18,7 @@ module load GMAP-GSNAP/2023-02-17-GCC-11.3.0
 # Define variables
 GENOME_FASTA="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna"
 INDEX_NAME="UNIL_3.0_gmap_genome"
-INDEX_DIR="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/"
+INDEX_DIR="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB"
 READS_FASTA="/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/Sb-vs-SB_CNV_genes_Sinv.fasta"
 OUTPUT_SAM="/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/Sb-vs-SB_CNV_genes_Sinv.sam"
 
