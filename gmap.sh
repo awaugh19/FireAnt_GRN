@@ -50,5 +50,6 @@ echo $R
 base=`basename "$R" _raw_trimmed.fq.gz`
 
 # Run GMAP-GSNAP
-gmap_build -d $SB_genome $SB_genome/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
-gsnap -d $SB_genome -A sam $R > $gmap_out/"$base".gmap.sam
+gmap_build --dir /scratch/ahw22099/FireAnt_GRN --genomedb UNIL_Sinv_3.4_SB /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
+
+gsnap -d $SB_genome -A sam --gunzip $R > "$base".gmap.sam
