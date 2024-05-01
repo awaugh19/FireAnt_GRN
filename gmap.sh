@@ -12,18 +12,19 @@
 
 # Load necessary modules
 module load GMAP-GSNAP/2023-02-17-GCC-11.3.0
+module load SAMtools/1.17-GCC-12.2.0
 
-# Define directories
-SB_genome="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB"
-if [ ! -d $SB_genome ]; then
-    mkdir -p $SB_genome
+cd /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB
+samtools faidx GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
+
+gmap_build -D /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB \
+-d GCF_016802725.1_UNIL_Sinv_3.0 GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna.fai
+
+gmap_out="/scratch/ahw22099/FireAnt_GRN/gmap_out"
+if [ ! -d $gmap_out ]
+then
+mkdir -p $gmap_out
 fi
 
-# Build index using gmapindex
-echo "Building GMAP index..."
-gmapindex -d UNIL_Sinv_3.4_SB -D $SB_genome -P $SB_genome/UNIL_Sinv_3.4_SB.genomecomp $SB_genome/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
-
-echo "Aligning reads using GSNAP..."
-gsnap -d UNIL_Sinv_3.4_SB -A sam /scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/Sb-vs-SB_CNV_genes_Sinv.fasta  > /scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/Sb-vs-SB_CNV_genes_Sinv.gmap.sam
-
-echo "Job completed."
+gsnap -D /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB -N 0 \
+-A sam -d /scratch/ahw22099/FireAnt_GRN/Sb-vs-SB_CNV_genes_Sinv.fq
