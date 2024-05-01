@@ -1,55 +1,40 @@
 #!/bin/bash
-#SBATCH --job-name=gmap_AK2020.sh                                  #Job name
-#SBATCH --partition=batch		                                        #Partition (queue) name
-#SBATCH --ntasks=4			                                            #Single task job
-#SBATCH --cpus-per-task=12                                          #Number of cores per task
-#SBATCH --mem=24gb			                                            #Total memory for job
-#SBATCH --time=24:00:00  		                                        #Time limit hrs:min:sec
-#SBATCH --output=/scratch/ahw22099/FireAnt_GRN/std_out/gmap_AK2020.log.%j			    #Standard output
-#SBATCH --error=/scratch/ahw22099/FireAnt_GRN/std_out/gmap_AK2020.err.%j		    #Standard error log
-#SBATCH --mail-user=ahw22099@uga.edu                                #Where to send mail -
-#SBATCH --mail-type=END,FAIL,ARRAY_TASKS                                       #Mail events (BEGIN, END, FAIL, ALL)
+#SBATCH --job-name=gmap_AK2020.sh
+#SBATCH --partition=batch
+#SBATCH --ntasks=4
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=24gb
+#SBATCH --time=24:00:00
+#SBATCH --output=/scratch/ahw22099/FireAnt_GRN/std_out/gmap_AK2020.log.%j
+#SBATCH --error=/scratch/ahw22099/FireAnt_GRN/std_out/gmap_AK2020.err.%j
+#SBATCH --mail-user=ahw22099@uga.edu
+#SBATCH --mail-type=END,FAIL,ARRAY_TASKS
 #SBATCH --array=0-63
 
 # Load necessary modules
 module load GMAP-GSNAP/2023-02-17-GCC-11.3.0
 
-#
-ArsenaultKing2020_trimmed_fq="/scratch/ahw22099/FireAnt_GRN/ArsenaultKing2020_trimmed_fq"
-if [ ! -d $ArsenaultKing2020_trimmed_fq ]
-then
-mkdir -p $ArsenaultKing2020_trimmed_fq
-fi
-
-gmap_genome_SB="/scratch/ahw22099/FireAnt_GRN/gmap_genome_SB"
-if [ ! -d $gmap_genome_SB ]
-then
-mkdir -p $gmap_genome_SB
-fi
-
+# Define directories
 SB_genome="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB"
-if [ ! -d $SB_genome ]
-then
-mkdir -p $SB_genome
+if [ ! -d $SB_genome ]; then
+    mkdir -p $SB_genome
 fi
 
-gmap_out="/scratch/ahw22099/FireAnt_GRN/gmap_out"
-if [ ! -d $gmap_out ]
-then
-mkdir -p $gmap_out
-fi
+# Build index using gmapindex
+echo "Building GMAP index..."
+gmapindex -d UNIL_Sinv_3.4_SB -D $SB_genome -P $SB_genome/UNIL_Sinv_3.4_SB.genomecomp $SB_genome/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
 
-cd $ArsenaultKing2020_trimmed_fq
-
-#make sample list for array job
+# Define input file list
 R_sample_list=($(<AK2020_trimmed_input_list.txt))
 R=${R_sample_list[${SLURM_ARRAY_TASK_ID}]}
 
-echo $R
+echo "Input file: $R"
 
-base=`basename "$R" _raw_trimmed.fq.gz`
+# Run GSNAP
+base=$(basename "$R" _raw_trimmed.fq.gz)
+echo "Base name: $base"
 
-# Run GMAP-GSNAP
-gmap_build --dir /scratch/ahw22099/FireAnt_GRN --genomedb UNIL_Sinv_3.4_SB /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
+echo "Aligning reads using GSNAP..."
+gsnap -d UNIL_Sinv_3.4_SB -A sam --gunzip $R > "$base".gmap.sam
 
-gsnap -d $SB_genome -A sam --gunzip $R > "$base".gmap.sam
+echo "Job completed."
