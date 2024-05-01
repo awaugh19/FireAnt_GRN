@@ -33,6 +33,12 @@ then
 mkdir -p $SB_genome
 fi
 
+gmap_out="/scratch/ahw22099/FireAnt_GRN/gmap_out"
+if [ ! -d $gmap_out ]
+then
+mkdir -p $gmap_out
+fi
+
 cd $ArsenaultKing2020_trimmed_fq
 
 #make sample list for array job
@@ -45,4 +51,4 @@ base=`basename "$R" _raw_trimmed.fq.gz`
 
 # Run GMAP-GSNAP
 gmap_build -d $SB_genome $SB_genome/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
-gsnap -d $SB_genome -A sam $R > "$base".gmap.sam
+gsnap -d $SB_genome -A sam $R > $gmap_out/"$base".gmap.sam
