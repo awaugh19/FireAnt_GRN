@@ -12,19 +12,18 @@
 
 # Load necessary modules
 module load GMAP-GSNAP/2023-02-17-GCC-11.3.0
-module load SAMtools/1.17-GCC-12.2.0
+#module load SAMtools/1.17-GCC-12.2.0
 
-cd /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB
-samtools faidx GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna
 
-gmap_build -D /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB \
--d GCF_016802725.1_UNIL_Sinv_3.0 GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna.fai
+# Define variables
+GENOME_FASTA="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna"
+INDEX_NAME="UNIL_3.0_gmap_genome"
+INDEX_DIR="/scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB/"
+READS_FASTA="/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/Sb-vs-SB_CNV_genes_Sinv.fasta"
+OUTPUT_SAM="/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/Sb-vs-SB_CNV_genes_Sinv.sam"
 
-gmap_out="/scratch/ahw22099/FireAnt_GRN/gmap_out"
-if [ ! -d $gmap_out ]
-then
-mkdir -p $gmap_out
-fi
+# Step 1: Build the GSNAP index for the reference genome
+gmap_build -d $INDEX_NAME -k 15 -D $INDEX_DIR $GENOME_FASTA
 
-gsnap -D /scratch/ahw22099/FireAnt_GRN/UNIL_Sinv_3.4_SB -N 0 \
--A sam -d /scratch/ahw22099/FireAnt_GRN/Sb-vs-SB_CNV_genes_Sinv.fq
+# Step 2: Run GSNAP for mapping
+gsnap -d $INDEX_NAME -D $INDEX_DIR -A sam $READS_FASTA > $OUTPUT_SAM
