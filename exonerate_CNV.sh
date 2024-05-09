@@ -20,7 +20,7 @@ TARGET_FASTA="GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna"
 
 # Run exonerate
 exonerate --model est2genome --showtargetgff --showalignment --showvulgar --bestn 5 \
---query first_gene.fasta --target GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna --verbose 1 > exonerateCNV_output.txt
+--query Sb-vs-SB_CNV_genes_Sinv.fasta --target GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna --verbose 1 > exonerateCNV_output.txt
 
 # Print completion message
 echo "Exonerate alignment completed. Results are saved in $OUTPUT_FILE"
