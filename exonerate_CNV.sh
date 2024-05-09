@@ -5,8 +5,8 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=24gb
 #SBATCH --time=24:00:00
-#SBATCH --output=/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/exonerate_CNV.log.%j
-#SBATCH --error=/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/exonerate_CNV.err.%j
+#SBATCH --output=/scratch/ahw22099/FireAnt_GRN/scripts/exonerate_CNV.log.%j
+#SBATCH --error=/scratch/ahw22099/FireAnt_GRN/scripts/exonerate_CNV.err.%j
 #SBATCH --mail-user=ahw22099@uga.edu
 #SBATCH --mail-type=END,FAIL
 #SBATCH --array=0-261
