@@ -20,7 +20,7 @@ TARGET_FASTA="GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna"
 OUTPUT_FILE="exonerate_output.txt"
 
 # Run exonerate
-exonerate --model est2genome --showtargetgff --showalignment --showvulgar --bestn 1 --query $QUERY_FASTA --target $TARGET_FASTA > $OUTPUT_FILE
+exonerate --model est2genome --showtargetgff --showalignment --showvulgar --bestn 5 --query $QUERY_FASTA --target $TARGET_FASTA > $OUTPUT_FILE
 
 # Print completion message
 echo "Exonerate alignment completed. Results are saved in $OUTPUT_FILE"
