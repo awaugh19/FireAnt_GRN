@@ -17,10 +17,10 @@ cd /scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV
 # Define input files
 QUERY_FASTA="Sb-vs-SB_CNV_genes_Sinv.fasta"
 TARGET_FASTA="GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna"
-OUTPUT_FILE="exonerate_output.txt"
 
 # Run exonerate
-exonerate --model est2genome --showtargetgff --showalignment --showvulgar --bestn 5 --query $QUERY_FASTA --target $TARGET_FASTA > $OUTPUT_FILE
+exonerate --model est2genome --showtargetgff --showalignment --showvulgar --bestn 5 \
+--query first_gene.fasta --target GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna --verbose 1 > exonerateCNV_output.txt
 
 # Print completion message
 echo "Exonerate alignment completed. Results are saved in $OUTPUT_FILE"
