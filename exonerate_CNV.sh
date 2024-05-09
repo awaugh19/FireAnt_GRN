@@ -9,6 +9,7 @@
 #SBATCH --error=/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/exonerate_CNV.err.%j
 #SBATCH --mail-user=ahw22099@uga.edu
 #SBATCH --mail-type=END,FAIL
+#SBATCH --array=0-261
 
 # Load necessary modules
 module load Exonerate/2.4.0-GCC-12.2.0
@@ -16,23 +17,27 @@ module load Exonerate/2.4.0-GCC-12.2.0
 # Change to working directory
 cd /scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV
 
+CNV_genes="/scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/CNV_genes"
+if [ ! -d $CNV_genes ]; then
+  mkdir -p $CNV_genes
+fi
+
 # Define input files
 QUERY_FASTA="Sb-vs-SB_CNV_genes_Sinv.fasta"
 TARGET_FASTA="GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna"
+#awk -v dir="$CNV_genes" '/^>/{s=++d".fa"} {print > s}' Sb-vs-SB_CNV_genes_Sinv.fasta
+#mv *.fa ./CNV_genes
 
-# Function to extract gene sequences
-extract_genes() {
-    awk '/^>/ {OUT=substr($0,2) ".fasta"}; {print >> OUT; close(OUT)}' $QUERY_FASTA
-}
 
-# Extract gene sequences into individual files
-extract_genes
+cd $CNV_genes
 
-# Iterate over each gene fasta file and run exonerate
-for gene_file in *.fasta; do
-    gene_name=$(basename "$gene_file" .fasta)
-    OUTPUT_FILE="${gene_name}_exonerate_output.txt"
-    exonerate --model est2genome --showtargetgff --showalignment --showvulgar --bestn 5 \
-    --query "$gene_file" --target $TARGET_FASTA --verbose 1 > "$OUTPUT_FILE"
-    echo "Exonerate alignment for $gene_name completed. Results are saved in $OUTPUT_FILE"
+#make sample list for array job
+fasta_num_list=($(<CNV_exo_input_list.txt))
+fasta_num=${fasta_num_list[${SLURM_ARRAY_TASK_ID}]}
+
+num=$(basename "$fasta_num" .fa)
+OUTPUT_FILE="${num}_exonerate_output.txt"
+
+exonerate --model est2genome --showtargetgff --showalignment --showvulgar --bestn 5 --query $fasta_num --target /scratch/ahw22099/FireAnt_GRN/Fontana2020_CNV/GCF_016802725.1_UNIL_Sinv_3.0_genomic.fasta --verbose 1 > "$OUTPUT_FILE"
+echo "Exonerate alignment for $gene_name completed. Results are saved in $OUTPUT_FILE"
 done
