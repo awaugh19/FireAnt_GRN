@@ -28,13 +28,11 @@ TARGET_FASTA="GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna"
 #awk -v dir="$CNV_genes" '/^>/{s=++d".fa"} {print > s}' Sb-vs-SB_CNV_genes_Sinv.fasta
 #mv *.fa ./CNV_genes
 
-
-cd $CNV_genes
-
 #make sample list for array job
 fasta_num_list=($(<CNV_exo_input_list.txt))
 fasta_num=${fasta_num_list[${SLURM_ARRAY_TASK_ID}]}
 
+cd $CNV_genes
 num=$(basename "$fasta_num" .fa)
 OUTPUT_FILE="${num}_exonerate_output.txt"
 
