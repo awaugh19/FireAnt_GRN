@@ -23,8 +23,6 @@ if [ ! -d $CNV_genes ]; then
 fi
 
 # Define input files
-QUERY_FASTA="Sb-vs-SB_CNV_genes_Sinv.fasta"
-TARGET_FASTA="GCF_016802725.1_UNIL_Sinv_3.0_genomic.fna"
 #awk -v dir="$CNV_genes" '/^>/{s=++d".fa"} {print > s}' Sb-vs-SB_CNV_genes_Sinv.fasta
 #mv *.fa ./CNV_genes
 
